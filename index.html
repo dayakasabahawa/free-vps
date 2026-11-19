@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="si" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="NEXUS VPS — free 24/7 cloud nodes, instant deployment and a built-in VLESS config studio. A futuristic static demo site built with HTML, CSS and JavaScript only." />
+  <meta name="theme-color" content="#070b14" />
+  <title>NEXUS VPS — Free 24/7 Hosting & VLESS Studio</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- inline icon sprite -->
+  <svg class="svg-sprite" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+    <symbol id="i-server" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="7" rx="2"/><rect x="3" y="13" width="18" height="7" rx="2"/><path d="M7 7.5h.01M7 16.5h.01M11 7.5h6M11 16.5h6"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3 4.5 6v5.5c0 4.6 3.1 8.3 7.5 9.5 4.4-1.2 7.5-4.9 7.5-9.5V6L12 3Z"/><path d="m9 12 2 2 4-4"/></symbol>
+    <symbol id="i-bolt" viewBox="0 0 24 24"><path d="M13 2 4 14h7l-1 8 9-12h-7l1-8Z"/></symbol>
+    <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.4 3.8 5.4 3.8 9S14.5 18.6 12 21c-2.5-2.4-3.8-5.4-3.8-9S9.5 5.4 12 3Z"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></symbol>
+    <symbol id="i-code" viewBox="0 0 24 24"><path d="m8 7-5 5 5 5M16 7l5 5-5 5M14 4l-4 16"/></symbol>
+    <symbol id="i-copy" viewBox="0 0 24 24"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></symbol>
+    <symbol id="i-terminal" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="m7 9 3 3-3 3M13 15h4"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+    <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 3v12M7 10l5 5 5-5M4 20h16"/></symbol>
+    <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M20 7v5h-5M4 17v-5h5"/><path d="M6.3 9a7 7 0 0 1 11.6-2L20 9M4 15l2.1 2A7 7 0 0 0 17.7 15"/></symbol>
+    <symbol id="i-chevron" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
+    <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></symbol>
+    <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></symbol>
+    <symbol id="i-moon" viewBox="0 0 24 24"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4 8.5 8.5 0 1 0 20 14.5Z"/></symbol>
+    <symbol id="i-activity" viewBox="0 0 24 24"><path d="M3 12h4l3-7 4 14 3-7h4"/></symbol>
+    <symbol id="i-key" viewBox="0 0 24 24"><circle cx="8" cy="15" r="4"/><path d="m11 12 9-9M17 6l2 2M14 9l2 2"/></symbol>
+    <symbol id="i-layers" viewBox="0 0 24 24"><path d="m12 3 9 5-9 5-9-5 9-5ZM3 12l9 5 9-5M3 16l9 5 9-5"/></symbol>
+    <symbol id="i-lock" viewBox="0 0 24 24"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></symbol>
+    <symbol id="i-up" viewBox="0 0 24 24"><path d="m6 14 6-6 6 6"/></symbol>
+  </svg>
+
+  <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+  <canvas id="particles" aria-hidden="true"></canvas>
+  <div class="ambient ambient-a" aria-hidden="true"></div>
+  <div class="ambient ambient-b" aria-hidden="true"></div>
+
+  <!-- HEADER -->
+  <header class="site-header" id="header">
+    <div class="container header-inner">
+      <a class="brand" href="#home" aria-label="NEXUS home">
+        <span class="brand-mark"><svg><use href="#i-layers"/></svg></span>
+        <span class="brand-text">NEXUS<span>.vps</span></span>
+      </a>
+
+      <nav class="nav" id="nav" aria-label="Main navigation">
+        <a href="#features">Features</a>
+        <a href="#plans">Plans</a>
+        <a href="#studio">VLESS Studio</a>
+        <a href="#network">Network</a>
+        <a href="#faq">FAQ</a>
+        <a class="nav-cta" href="#studio">Launch node <svg><use href="#i-arrow"/></svg></a>
+      </nav>
+
+      <div class="header-actions">
+        <button class="icon-btn" id="themeToggle" type="button" title="Toggle theme" aria-label="Toggle theme">
+          <svg class="icon-sun"><use href="#i-sun"/></svg>
+          <svg class="icon-moon"><use href="#i-moon"/></svg>
+        </button>
+        <button class="icon-btn menu-btn" id="menuBtn" type="button" aria-label="Open menu" aria-expanded="false">
+          <svg class="icon-menu"><use href="#i-menu"/></svg>
+          <svg class="icon-close"><use href="#i-close"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section class="hero" id="home">
+      <div class="container hero-grid">
+        <div class="hero-copy reveal">
+          <div class="eyebrow"><span class="pulse"></span> 24/7 ONLINE <i></i> FREE TIER AVAILABLE</div>
+          <h1>Your cloud.<br /><span class="gradient-text">Zero downtime.</span><br />Total control.</h1>
+          <p class="hero-sub">Deploy a private node in seconds, manage it from one clean dashboard, and generate VLESS configs without touching a terminal. Built for people who want hosting that just works.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#plans">Claim free node <svg><use href="#i-arrow"/></svg></a>
+            <a class="btn btn-ghost" href="#studio"><svg><use href="#i-terminal"/></svg> Open config studio</a>
+          </div>
+          <div class="hero-stats">
+            <div><strong data-count="38">0</strong><span>Active nodes</span></div>
+            <div><strong data-count="99.98" data-decimals="2" data-suffix="%">0</strong><span>Uptime</span></div>
+            <div><strong data-count="12" data-suffix="k+">0</strong><span>Deployments</span></div>
+            <div><strong data-count="18" data-suffix="ms">0</strong><span>Avg. latency</span></div>
+          </div>
+        </div>
+
+        <div class="hero-visual reveal">
+          <div class="terminal-card">
+            <div class="terminal-top">
+              <div class="dots"><span></span><span></span><span></span></div>
+              <span class="terminal-title">nexus@deploy:~</span>
+              <span class="terminal-live"><span class="pulse"></span> LIVE</span>
+            </div>
+            <div class="terminal-body" id="terminalBody" aria-live="polite"></div>
+            <div class="terminal-chart" aria-hidden="true">
+              <div class="chart-head"><span>NETWORK TRAFFIC</span><span id="chartValue">1.24 GB/s</span></div>
+              <div class="bars" id="chartBars"></div>
+            </div>
+          </div>
+          <div class="float-chip chip-a"><svg><use href="#i-shield"/></svg><span>XTLS / TLS 1.3</span></div>
+          <div class="float-chip chip-b"><svg><use href="#i-bolt"/></svg><span>Instant deploy</span></div>
+          <div class="float-chip chip-c"><svg><use href="#i-globe"/></svg><span>9 regions</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TICKER -->
+    <div class="ticker" aria-hidden="true">
+      <div class="ticker-track">
+        <span>SINGAPORE <b>●</b> ONLINE</span><span>FRANKFURT <b>●</b> ONLINE</span><span>TOKYO <b>●</b> ONLINE</span><span>LONDON <b>●</b> ONLINE</span><span>NEW YORK <b>●</b> ONLINE</span><span>SYDNEY <b>●</b> ONLINE</span><span>SÃO PAULO <b>●</b> ONLINE</span><span>MUMBAI <b>●</b> ONLINE</span>
+        <span>SINGAPORE <b>●</b> ONLINE</span><span>FRANKFURT <b>●</b> ONLINE</span><span>TOKYO <b>●</b> ONLINE</span><span>LONDON <b>●</b> ONLINE</span><span>NEW YORK <b>●</b> ONLINE</span><span>SYDNEY <b>●</b> ONLINE</span><span>SÃO PAULO <b>●</b> ONLINE</span><span>MUMBAI <b>●</b> ONLINE</span>
+      </div>
+    </div>
+
+    <!-- FEATURES -->
+    <section class="section" id="features">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="section-tag">// WHY NEXUS</span>
+          <h2>Everything you need.<br /><span class="muted">Nothing you don't.</span></h2>
+          <p>A focused toolkit for deploying, securing and monitoring your nodes — wrapped in an interface that feels good to use.</p>
+        </div>
+        <div class="feature-grid">
+          <article class="feature-card reveal"><span class="feature-icon"><svg><use href="#i-bolt"/></svg></span><h3>Instant provisioning</h3><p>Go from zero to running node in under 30 seconds. No tickets, no waiting, no manual setup.</p><span class="feature-index">01</span></article>
+          <article class="feature-card reveal"><span class="feature-icon"><svg><use href="#i-shield"/></svg></span><h3>Privacy first</h3><p>TLS 1.3, XTLS-Vision and real-world transport options keep your traffic looking like normal HTTPS.</p><span class="feature-index">02</span></article>
+          <article class="feature-card reveal"><span class="feature-icon"><svg><use href="#i-globe"/></svg></span><h3>9 global regions</h3><p>Pick the edge closest to you. Automatic failover moves workloads when a node gets noisy.</p><span class="feature-index">03</span></article>
+          <article class="feature-card reveal"><span class="feature-icon"><svg><use href="#i-clock"/></svg></span><h3>True 24/7 uptime</h3><p>Redundant power, network and storage. Continuous health checks with public status metrics.</p><span class="feature-index">04</span></article>
+          <article class="feature-card reveal"><span class="feature-icon"><svg><use href="#i-terminal"/></svg></span><h3>Config studio</h3><p>Generate VLESS URIs for v2rayN, v2rayNG, NekoRay and Shadowrocket right in your browser.</p><span class="feature-index">05</span></article>
+          <article class="feature-card reveal"><span class="feature-icon"><svg><use href="#i-activity"/></svg></span><h3>Live telemetry</h3><p>Latency, bandwidth and load at a glance. Spot a problem before it becomes an outage.</p><span class="feature-index">06</span></article>
+        </div>
+      </div>
+    </section>
+
+    <!-- PLANS -->
+    <section class="section section-alt" id="plans">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="section-tag">// PRICING</span>
+          <h2>Start free.<br /><span class="muted">Scale when you're ready.</span></h2>
+          <p>No hidden fees. Cancel any time. The free tier stays free — forever.</p>
+          <div class="billing-toggle" role="group" aria-label="Billing period">
+            <button type="button" class="active" data-billing="monthly">Monthly</button>
+            <button type="button" data-billing="yearly">Yearly <span>−20%</span></button>
+          </div>
+        </div>
+        <div class="plans-grid">
+          <article class="plan-card reveal">
+            <div class="plan-top"><span class="plan-name">STARTER</span><span class="plan-badge">FREE FOREVER</span></div>
+            <div class="plan-price"><span class="currency">Rs.</span><span class="amount" data-monthly="0" data-yearly="0">0</span><span class="period">/ month</span></div>
+            <p class="plan-desc">Everything you need to get online and stay online.</p>
+            <ul class="plan-list">
+              <li><svg><use href="#i-check"/></svg> 1 node, 2 vCPU</li>
+              <li><svg><use href="#i-check"/></svg> 1 GB RAM / 20 GB SSD</li>
+              <li><svg><use href="#i-check"/></svg> 1 TB monthly transfer</li>
+              <li><svg><use href="#i-check"/></svg> VLESS config generator</li>
+              <li><svg><use href="#i-check"/></svg> Community support</li>
+            </ul>
+            <a class="btn btn-outline plan-btn" href="#studio">Deploy free node</a>
+          </article>
+
+          <article class="plan-card featured reveal">
+            <div class="plan-ribbon">MOST POPULAR</div>
+            <div class="plan-top"><span class="plan-name">PRO</span><span class="plan-badge">24/7 PRIORITY</span></div>
+            <div class="plan-price"><span class="currency">Rs.</span><span class="amount" data-monthly="1200" data-yearly="960">1,200</span><span class="period">/ month</span></div>
+            <p class="plan-desc">More power, more regions, and priority network routing.</p>
+            <ul class="plan-list">
+              <li><svg><use href="#i-check"/></svg> 3 nodes, 4 vCPU</li>
+              <li><svg><use href="#i-check"/></svg> 8 GB RAM / 80 GB NVMe</li>
+              <li><svg><use href="#i-check"/></svg> 5 TB monthly transfer</li>
+              <li><svg><use href="#i-check"/></svg> All VLESS transports + XTLS</li>
+              <li><svg><use href="#i-check"/></svg> Priority 24/7 support</li>
+            </ul>
+            <a class="btn btn-primary plan-btn" href="#studio">Choose Pro <svg><use href="#i-arrow"/></svg></a>
+          </article>
+
+          <article class="plan-card reveal">
+            <div class="plan-top"><span class="plan-name">ULTIMATE</span><span class="plan-badge">SCALE</span></div>
+            <div class="plan-price"><span class="currency">Rs.</span><span class="amount" data-monthly="3500" data-yearly="2800">3,500</span><span class="period">/ month</span></div>
+            <p class="plan-desc">Dedicated resources for serious, always-on workloads.</p>
+            <ul class="plan-list">
+              <li><svg><use href="#i-check"/></svg> 10 nodes, 8 vCPU</li>
+              <li><svg><use href="#i-check"/></svg> 32 GB RAM / 320 GB NVMe</li>
+              <li><svg><use href="#i-check"/></svg> Unmetered transfer</li>
+              <li><svg><use href="#i-check"/></svg> Custom domains + SNI</li>
+              <li><svg><use href="#i-check"/></svg> 1-on-1 setup assistance</li>
+            </ul>
+            <a class="btn btn-outline plan-btn" href="#studio">Go Ultimate</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- VLESS STUDIO -->
+    <section class="section" id="studio">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="section-tag">// VLESS STUDIO</span>
+          <h2>Build a config.<br /><span class="muted">Copy. Connect. Done.</span></h2>
+          <p>Everything runs locally in your browser — your keys never leave this page.</p>
+        </div>
+
+        <div class="studio-grid">
+          <form class="studio-form reveal" id="configForm" novalidate>
+            <div class="form-head"><svg><use href="#i-key"/></svg><h3>Node parameters</h3><button type="button" class="text-btn" id="randomUuid"><svg><use href="#i-refresh"/></svg> Random UUID</button></div>
+
+            <div class="field-row">
+              <label class="field"><span>Server address</span><input type="text" id="cfgServer" value="sg1.nexus-vps.net" autocomplete="off" required /></label>
+              <label class="field field-sm"><span>Port</span><input type="number" id="cfgPort" value="443" min="1" max="65535" required /></label>
+            </div>
+            <label class="field"><span>UUID / User ID</span><input type="text" id="cfgUuid" spellcheck="false" required /></label>
+            <div class="field-row">
+              <label class="field"><span>Transport</span><select id="cfgTransport"><option value="ws">WebSocket (ws)</option><option value="grpc">gRPC</option><option value="h2">HTTP/2 (h2)</option><option value="raw">RAW / TCP</option></select></label>
+              <label class="field"><span>Security</span><select id="cfgSecurity"><option value="tls">TLS</option><option value="reality">REALITY</option><option value="none">None</option></select></label>
+            </div>
+            <div class="field-row">
+              <label class="field"><span>Path / Service name</span><input type="text" id="cfgPath" value="/vless" autocomplete="off" /></label>
+              <label class="field"><span>SNI / Host</span><input type="text" id="cfgSni" value="sg1.nexus-vps.net" autocomplete="off" /></label>
+            </div>
+            <label class="field"><span>Remark (profile name)</span><input type="text" id="cfgName" value="NEXUS · Singapore 01" autocomplete="off" /></label>
+
+            <div class="form-actions">
+              <button class="btn btn-primary" type="submit"><svg><use href="#i-bolt"/></svg> Generate link</button>
+              <button class="btn btn-ghost" type="button" id="resetCfg"><svg><use href="#i-refresh"/></svg> Reset</button>
+            </div>
+            <p class="form-note"><svg><use href="#i-lock"/></svg> Local-only generation. No data is sent anywhere.</p>
+          </form>
+
+          <div class="studio-output reveal">
+            <div class="output-head"><span><svg><use href="#i-terminal"/></svg> Generated URI</span><span class="status-dot" id="outputStatus">waiting for input</span></div>
+            <div class="uri-box" id="uriBox"><span class="uri-placeholder">Your vless:// link will appear here…</span></div>
+            <div class="output-actions">
+              <button class="btn btn-primary" type="button" id="copyUri" disabled><svg><use href="#i-copy"/></svg> Copy link</button>
+              <button class="btn btn-outline" type="button" id="downloadUri" disabled><svg><use href="#i-download"/></svg> Download .txt</button>
+            </div>
+
+            <div class="client-tabs" role="tablist" aria-label="Client guides">
+              <button type="button" class="active" data-client="v2rayNG" role="tab">v2rayNG</button>
+              <button type="button" data-client="v2rayN" role="tab">v2rayN</button>
+              <button type="button" data-client="NekoRay" role="tab">NekoRay</button>
+              <button type="button" data-client="Shadowrocket" role="tab">Shadowrocket</button>
+            </div>
+            <ol class="client-steps" id="clientSteps"></ol>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- NETWORK -->
+    <section class="section section-alt" id="network">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="section-tag">// LIVE NETWORK</span>
+          <h2>Every node.<br /><span class="muted">One clear view.</span></h2>
+          <p>Live-style telemetry simulated for this demo. Latency refreshes automatically.</p>
+        </div>
+        <div class="network-wrap reveal">
+          <div class="network-summary">
+            <div><span class="mini-label">GLOBAL UPTIME</span><strong>99.98%</strong><span class="mini-sub">last 30 days</span></div>
+            <div><span class="mini-label">TOTAL NODES</span><strong>38</strong><span class="mini-sub">across 9 regions</span></div>
+            <div><span class="mini-label">AVG. RESPONSE</span><strong id="avgLatency">18 ms</strong><span class="mini-sub">updated just now</span></div>
+            <div><span class="mini-label">STATUS</span><strong class="ok-color">ALL SYSTEMS GO</strong><span class="mini-sub">no incidents</span></div>
+          </div>
+          <div class="node-list" id="nodeList"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- STEPS -->
+    <section class="section" id="how">
+      <div class="container">
+        <div class="section-head reveal"><span class="section-tag">// HOW IT WORKS</span><h2>Three steps.<br /><span class="muted">That's the whole thing.</span></h2></div>
+        <div class="steps-grid">
+          <div class="step reveal"><span class="step-num">01</span><span class="step-icon"><svg><use href="#i-server"/></svg></span><h3>Pick a region</h3><p>Choose the closest edge node. We'll pre-fill the configuration for you.</p></div>
+          <div class="step reveal"><span class="step-num">02</span><span class="step-icon"><svg><use href="#i-code"/></svg></span><h3>Generate config</h3><p>Tune the transport and security settings, then copy your VLESS URI.</p></div>
+          <div class="step reveal"><span class="step-num">03</span><span class="step-icon"><svg><use href="#i-bolt"/></svg></span><h3>Connect & go</h3><p>Import into your client and enjoy a stable, always-on connection.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section section-alt" id="faq">
+      <div class="container faq-layout">
+        <div class="faq-intro reveal">
+          <span class="section-tag">// FAQ</span>
+          <h2>Good questions.<br /><span class="muted">Straight answers.</span></h2>
+          <p>Still curious? Reach out and we'll help you pick the right setup.</p>
+          <a class="btn btn-outline" href="mailto:hello@nexus-vps.example">Contact us <svg><use href="#i-arrow"/></svg></a>
+        </div>
+        <div class="accordion reveal" id="accordion">
+          <div class="acc-item"><button type="button" class="acc-q"><span>Is the free plan really free forever?</span><svg><use href="#i-chevron"/></svg></button><div class="acc-a"><p>Yes. The Starter tier has no expiry and no credit card requirement. It's limited in resources, but it never turns into a bill.</p></div></div>
+          <div class="acc-item"><button type="button" class="acc-q"><span>What is VLESS and why would I use it?</span><svg><use href="#i-chevron"/></svg></button><div class="acc-a"><p>VLESS is a lightweight proxy protocol used by Xray-based clients. It supports modern transports like WebSocket, gRPC and HTTP/2, and can be wrapped in TLS or REALITY for a clean, HTTPS-like connection.</p></div></div>
+          <div class="acc-item"><button type="button" class="acc-q"><span>Do I need to know how to use a terminal?</span><svg><use href="#i-chevron"/></svg></button><div class="acc-a"><p>No. Deployment and config generation are handled in the browser. The Studio produces a ready-to-import link for popular clients.</p></div></div>
+          <div class="acc-item"><button type="button" class="acc-q"><span>Which client should I pick?</span><svg><use href="#i-chevron"/></svg></button><div class="acc-a"><p>v2rayNG for Android, v2rayN for Windows, NekoRay for a cross-platform desktop option, and Shadowrocket for iPhone/iPad. Guides for all four are in the Studio.</p></div></div>
+          <div class="acc-item"><button type="button" class="acc-q"><span>Can I change regions later?</span><svg><use href="#i-chevron"/></svg></button><div class="acc-a"><p>Absolutely. Switch any time from your node list. Your config can be regenerated with the new address in one click.</p></div></div>
+          <div class="acc-item"><button type="button" class="acc-q"><span>Is this website a real hosting provider?</span><svg><use href="#i-chevron"/></svg></button><div class="acc-a"><p>No — this is a front-end demo/template built with HTML, CSS and JavaScript only. Prices, nodes and telemetry shown here are illustrative sample data.</p></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-section">
+      <div class="container">
+        <div class="cta-box reveal">
+          <div class="cta-glow" aria-hidden="true"></div>
+          <span class="section-tag">// READY WHEN YOU ARE</span>
+          <h2>Your node is<br />one click away.</h2>
+          <p>No setup fee. No waiting. Just pick a region and go.</p>
+          <a class="btn btn-dark" href="#studio">Open config studio <svg><use href="#i-arrow"/></svg></a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <a class="brand" href="#home"><span class="brand-mark"><svg><use href="#i-layers"/></svg></span><span class="brand-text">NEXUS<span>.vps</span></span></a>
+        <p>A fictional hosting concept, designed as a front-end demo. All names, prices and statuses are sample data.</p>
+      </div>
+      <div class="footer-links"><h4>Product</h4><a href="#features">Features</a><a href="#plans">Pricing</a><a href="#studio">VLESS Studio</a><a href="#network">Network</a></div>
+      <div class="footer-links"><h4>Resources</h4><a href="#how">How it works</a><a href="#faq">FAQ</a><a href="#faq">Support</a><a href="#home">Status</a></div>
+      <div class="footer-links"><h4>Legal</h4><a href="#faq">Privacy</a><a href="#faq">Terms</a><a href="#faq">Acceptable use</a></div>
+    </div>
+    <div class="container footer-bottom"><span>© <span id="year">2026</span> NEXUS VPS. Built with HTML + CSS + JS.</span><span class="footer-status"><span class="pulse"></span> All systems operational</span></div>
+  </footer>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <button class="to-top" id="toTop" type="button" aria-label="Back to top"><svg><use href="#i-up"/></svg></button>
+
+  <script src="script.js"></script>
+</body>
+</html>
